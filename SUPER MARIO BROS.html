@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/IMAGENES/Super_Paper_Mario_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Nivel 1 | SUPER MARIO BROS</title>
+    </head>
+
+<body>
+    <h3>Un pequeño ejemplo de como seria el juego</h3>
+  <div id="nivel">
+    <!-- Personaje -->
+    <div class="personaje"></div>
+    <!-- Obstáculos -->
+    <div class="obstaculo"></div>
+    <!-- Meta -->
+    <div class="meta"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Obtener elementos
+      var personaje = document.querySelector('.personaje');
+      var obstaculo = document.querySelector('.obstaculo');
+      var meta = document.querySelector('.meta');
+
+      // Función para reiniciar nivel
+      function reiniciarNivel() {
+        personaje.style.left = '0';
+      }
+
+      // Función para cambiar de página al llegar a la meta
+      function cambiarPagina() {
+        window.location.href = 'final.html';
+      }
+
+      // Manejar el evento de teclado
+      document.addEventListener('keydown', function(event) {
+        var posicion = parseInt(window.getComputedStyle(personaje).getPropertyValue('left'));
+        var alturaSuelo = parseInt(window.getComputedStyle(personaje).getPropertyValue('bottom'));
+        
+        // Mover hacia la izquierda con la tecla A
+        if (event.key === 'a') {
+          personaje.style.left = (posicion - 10) + 'px';
+        }
+        
+        // Mover hacia la derecha con la tecla D
+        if (event.key === 'd') {
+          personaje.style.left = (posicion + 10) + 'px';
+        }
+        
+        // Saltar con la tecla W
+        if (event.key === 'w' && alturaSuelo < 100) {
+          personaje.style.bottom = (alturaSuelo + 50) + 'px';
+          setTimeout(function() {
+            personaje.style.bottom = alturaSuelo + 'px';
+          }, 300);
+        }
+
+        // Verificar colisión con obstáculo
+        var personajeRect = personaje.getBoundingClientRect();
+        var obstaculoRect = obstaculo.getBoundingClientRect();
+        if (personajeRect.left < obstaculoRect.right &&
+            personajeRect.right > obstaculoRect.left &&
+            personajeRect.bottom > obstaculoRect.top &&
+            personajeRect.top < obstaculoRect.bottom) {
+          reiniciarNivel();
+        }
+
+        // Verificar si llegó a la meta
+        var metaRect = meta.getBoundingClientRect();
+        if (personajeRect.left < metaRect.right &&
+            personajeRect.right > metaRect.left &&
+            personajeRect.bottom > metaRect.top &&
+            personajeRect.top < metaRect.bottom) {
+          cambiarPagina();
+        }
+      });
+    });
+  </script>
+
+  <style>
+    /* Estilos básicos */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #nivel {
+      width: 800px; /* Ancho del nivel */
+      height: 400px; /* Alto del nivel */
+      background-color: #65a0cf; /* Color de fondo del nivel */
+      position: relative;
+    }
+    .personaje {
+      width: 50px; /* Ancho del personaje */
+      height: 50px; /* Alto del personaje */
+      background-color: red; /* Color del personaje */
+      position: absolute;
+      bottom: 0; /* Inicialmente en la parte inferior del nivel */
+      left: 0; /* Inicialmente en la parte izquierda del nivel */
+    }
+    .obstaculo {
+      width: 100px; /* Ancho del obstáculo */
+      height: 20px; /* Alto del obstáculo */
+      background-color: brown; /* Color del obstáculo */
+      position: absolute;
+      bottom: 50px; /* Altura del suelo + altura del obstáculo */
+      left: 200px; /* Posición del obstáculo */
+    }
+    .meta {
+      width: 50px; /* Ancho de la meta */
+      height: 100px; /* Alto de la meta */
+      background-color: green; /* Color de la meta */
+      position: absolute;
+      bottom: 0; /* Altura del suelo */
+      right: 0; /* Al final del nivel */
+    }
+  </style>
+  <audio controls autoplay loop>
+    <source src="audio/Super Mario Bros. Theme Song.mp3" type="audio/mp3">
+  </audio>
+</body>
+</html>

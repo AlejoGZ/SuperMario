@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap');
+
+body{
+    background: #EB0101;
+}
+h1{
+    font-family: "Reddit Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700 ;
+  font-style: normal;
+  font-size: 100px ;
+  color: azure;
+}
+h2{
+    font-family: "Reddit Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700 ;
+  font-style: normal;
+  font-size: 100px ;
+  color: aquamarine;
+}
+h3{
+    font-family: "Reddit Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700 ;
+  font-style: normal;
+  font-size: 40px ;
+  color: azure;
+}
+.mario{
+    width: 780px;
+    height: 565px;
+    border-radius: 20%;
+}
+
+.mario2{
+    width: 591px;
+    height: 432px;
+}
+
+.videomario{
+  width: 400px;
+  height: 300px;
+}
